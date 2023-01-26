@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding  ="UTF-8"?>
+<configuration>
+<appender name="fichero1" class="ch.qos.logback.core.FileAppender">
+   <file>/home/daw/salidaFicheroCoche.log</file>
+   <append>true</append>
+   <encoder>
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %red%msg%n</pattern>
+   </encoder>
+</appender>
+
+<logger name="salidaFicheroCoche" level="info">
+<appender-ref ref="fichero1"/>
+</logger>
+
+<appender name="Consola" class="ch.qos.logback.core.ConsoleAppender">
+</appender>
+
+<logger name="logEjemplosBinarios">
+<appender-ref ref="Consola"/>
+</logger>
+
+<appender name="fichero2" class="ch.qos.logback.core.FileAppender">
+   <file>/home/daw/salidaFicheroErrorBinario.log</file>
+   <append>true</append>
+   <encoder>
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %red%msg%n</pattern>
+   </encoder>
+</appender>
+<logger name="salidaFicheroErrorBinario" level="info">
+<appender-ref ref="fichero2"/>
+</logger>
+
+<appender name="fichero3"
+		class="ch.qos.logback.core.FileAppender">
+		<file>/home/daw/salidaConectadoServer.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %red%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+			
+	<logger name="tema4.Logsocket" level="INFO"> <!-- Log conectado al server -->
+		<appender-ref ref="fichero3" />
+	</logger>
+	
+	<appender name="fichero4"                        
+		class="ch.qos.logback.core.FileAppender"> <!-- Log error de conexion -->
+		<file>/home/daw/salidaErrorServer.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %red%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+			
+	<logger name="tema4.LogSocketError" level="ERROR">
+		<appender-ref ref="fichero4" />
+	</logger>
+	
+	
+	<appender name="rollingFile" 
+		class="ch.qos.logback.core.rolling.RollingFileAppender"> <!-- Appender de log de mximo 20KB-->
+	    
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+	        <fileNamePattern>/home/daw/ficheroMax20KB</fileNamePattern>
+	        <!-- Maximo tamaño por cada archivo -->
+	       <maxFileSize>20KB</maxFileSize>    
+	       <!-- Cantidad máxima de archivos -->
+	       <maxHistory>10000</maxHistory>
+	       <!-- Capacidad maxima entre todos los archivos creados-->
+	       <totalSizeCap>20GB</totalSizeCap>
+	    </rollingPolicy>
+	    
+	    <encoder>
+	        <pattern>[%thread] %-5level %logger{36} - %msg%n</pattern>
+	    </encoder>
+	</appender>
+	
+	<logger name="log20kb" level="INFO">
+		<appender-ref ref="rollingFile" />
+	</logger>
+</configuration>
